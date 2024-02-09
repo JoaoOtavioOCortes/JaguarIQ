@@ -1,5 +1,5 @@
 import pygame
-import a
+import Buttons
 
 pygame.init()
 
@@ -18,9 +18,9 @@ quit_img = pygame.image.load('images/buttons/Quit.png').convert_alpha()
 options_img = pygame.image.load('images/buttons/Options.png').convert_alpha()
 
 #create button instancesS
-start_button = a.b(100, 500, start_img)
-quit_button = a.b(550, 500, quit_img)
-options_button = a.b(800, 500, options_img)
+start_button = Buttons.Button(100, 500, start_img)
+quit_button = Buttons.Button(550,500, quit_img)
+options_button = Buttons.Button(800, 500, options_img)
 
 
 #game loop
