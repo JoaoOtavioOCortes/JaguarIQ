@@ -25,36 +25,24 @@ while loop:
     while loopplvr:      
         palavra = ''
         for letra in pergunta.value:
+            if letra == ' ':
+                pass
+
+            elif keyboard.is_pressed('Space') == True:
+                loopplvr = False         
+                break
+
+            elif len(palavra)==len(pergunta.value):
+                print('Tempo esgotado!')
+                loopplvr = False
+
+            else:
+                print(palavra)
             palavra += letra     
             time.sleep(0.5)
 
-            if letra == ' ':
-                pass
-            else:
-                print(palavra)
-
-            if letra == len(pergunta.value):
-                print('Tempo esgotado.')
-                loopplvr = False
-            elif keyboard.is_pressed('Space') == True:
-                loopplvr = False          
-                break  
-        
-        loop = False
-
+    print(f'A resposta é: {sheet['B'+cont].value}',)
+    loop = False
            
-#resposta
-print(f'A resposta é: {sheet['B'+cont].value}',)
 
-#comando de certo ou errado
-print('Se sua resposta está certa aperte = "C"\nSe sua resposta está errada aperte = "E"')
-if keyboard.is_pressed('C'):
-    False
-    print('Você acertou! :)')
-    
-elif keyboard.is_pressed('E'):
-    False
-    print('Você errou ;(')
 
-else:
-    pass
