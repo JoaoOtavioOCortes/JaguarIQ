@@ -13,6 +13,7 @@ def randomize():
 loop = True
 corw = True
 cont = randomize()
+loopplvr = True
 
 #gerando a pergunta
 while loop:
@@ -21,29 +22,39 @@ while loop:
     pergunta = sheet['A'+cont]       
     
     #print da pergunta letra por letra
-    while True:      
+    while loopplvr:      
         palavra = ''
-        for letra in pergunta.value:     
+        for letra in pergunta.value:
             palavra += letra     
             time.sleep(0.5)
-            print(palavra)
-        print('Tempo esgotado.')
-        break
-    loop = False
+
+            if letra == ' ':
+                pass
+            else:
+                print(palavra)
+
+            if letra == len(pergunta.value):
+                print('Tempo esgotado.')
+                loopplvr = False
+            elif keyboard.is_pressed('Space') == True:
+                loopplvr = False          
+                break  
+        
+        loop = False
+
            
 #resposta
 print(f'A resposta é: {sheet['B'+cont].value}',)
 
 #comando de certo ou errado
 print('Se sua resposta está certa aperte = "C"\nSe sua resposta está errada aperte = "E"')
-while True:
-    if keyboard.is_pressed('C'):
-        print('Você acertou! :)')
-        False
+if keyboard.is_pressed('C'):
+    False
+    print('Você acertou! :)')
     
-    elif keyboard.is_pressed('E'):
-        print('Você errou ;(')
-        False
-    
-    else:
-        pass
+elif keyboard.is_pressed('E'):
+    False
+    print('Você errou ;(')
+
+else:
+    pass
