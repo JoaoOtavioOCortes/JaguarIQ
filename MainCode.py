@@ -42,7 +42,7 @@ while loop:
             palavra += letra     
             time.sleep(0.5)
 
-    print(f'A resposta é: {resposta.value}',)
+    print(f'A resposta é: {resposta.value}')
     loop = False
            
 
