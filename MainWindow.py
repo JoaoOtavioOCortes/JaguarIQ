@@ -5,6 +5,7 @@ pygame.init()
 
 
 running = True
+menu = True
 
 #Create display window
 window = pygame.display.set_mode((1080,920))
@@ -27,11 +28,13 @@ options_button = Buttons.Button(410, 550, options_img, 0.8)
 while running:
     
     window.fill(collor)
-
-    start_button.draw(window)
-    options_button.draw(window)
-    if quit_button.draw(window):
-        running = False
+    if menu: 
+        if start_button.draw(window):
+            menu = False    
+        if options_button.draw(window):
+            menu = False
+        if quit_button.draw(window):
+            running = False
     
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
