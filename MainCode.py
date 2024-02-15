@@ -19,7 +19,8 @@ loopplvr = True
 while loop:
     planilha = openpyxl.load_workbook('perguntas/planilha.xlsx')
     sheet = planilha.active  
-    pergunta = sheet['A'+cont]       
+    pergunta = sheet['A'+cont]
+    resposta = sheet['B'+cont]       
     
     #print da pergunta letra por letra
     while loopplvr:      
@@ -41,7 +42,7 @@ while loop:
             palavra += letra     
             time.sleep(0.5)
 
-    print(f'A resposta é: {sheet['B'+cont].value}',)
+    print(f'A resposta é: {resposta.value}',)
     loop = False
            
 
