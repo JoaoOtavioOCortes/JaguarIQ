@@ -14,35 +14,39 @@ loop = True
 corw = True
 cont = randomize()
 loopplvr = True
+verf = 0
 
 #gerando a pergunta
 while loop:
     planilha = openpyxl.load_workbook('perguntas/planilha.xlsx')
     sheet = planilha.active  
-    pergunta = sheet['A'+cont]
-    resposta = sheet['B'+cont]       
+    pergunta = sheet['A'+cont].value
+    resposta = sheet['B'+cont].value 
     
     #print da pergunta letra por letra
     while loopplvr:      
         palavra = ''
-        for letra in pergunta.value:
-            if letra == ' ':
-                pass
+        for letra in pergunta:
 
-            elif keyboard.is_pressed('Space') == True:
+            if keyboard.is_pressed('Space') == True:
+                verf = 1
                 loopplvr = False         
                 break
-
-            elif len(palavra)==len(pergunta.value):
-                print('Tempo esgotado!')
-                loopplvr = False
-
+                
             else:
                 print(palavra)
+            
             palavra += letra     
-            time.sleep(0.5)
+            time.sleep(0.3)
 
-    print(f'A resposta é: {resposta.value}')
+        if verf == 0:
+            print('Tempo esgotado!')
+            loopplvr = False
+            
+        else:
+            loopplvr = False
+        
+    print(f'A resposta é: {resposta}')
     loop = False
            
 
