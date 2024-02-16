@@ -1,8 +1,10 @@
 import openpyxl   
 import random
 import time
-import keyboard      
-   
+import keyboard  
+import pygame
+
+ 
 #função para randomizar as perguntas
 def randomize():
     line = random.randint(1,260)
@@ -15,6 +17,7 @@ corw = True
 cont = randomize()
 loopplvr = True
 verf = 0
+running = True
 
 #gerando a pergunta
 while loop:
@@ -42,7 +45,7 @@ while loop:
         if verf == 0:
             print('Tempo esgotado!')
             loopplvr = False
-            
+
         else:
             loopplvr = False
         
