@@ -17,6 +17,7 @@ verf = 0
 running = True
 
 
+
 pygame.init()
 pygame.font.init()
 
@@ -25,7 +26,7 @@ sheet = planilha.active
 pergunta = sheet['A'+cont].value
 resposta = sheet['B'+cont].value 
 
-window = pygame.display.set_mode()
+window = pygame.display.set_mode((1200,700))
 collor =  (255,255,255) 
 pygame.display.set_caption('JaguarIQ')
 pygame.surface.Surface((1200,700))
@@ -35,13 +36,17 @@ while running:
     window.fill(collor)
     while loopplvr: 
         palavra = ''
+        posx = 50
+        posy = 50
+        posXrect = 50
+        posYrect = 50
+        rect = pygame.Rect(posXrect,posYrect,20,20)
 
         for letra in pergunta:
-            posx = 50
-            posy = 50
+            
             fontela = fonte.render(palavra, 1, (0,0,0))
             window.blit(fontela,(posx,posy))
-            pygame.display.update()  
+            
 
             if keyboard.is_pressed('Space') == True:
                 verf = 1
@@ -50,19 +55,21 @@ while running:
                 
             else:
                 print(palavra)
-            
-            palavra += letra     
+                palavra += letra
+                rect.x += 12
+            pygame.display.update()    
             time.sleep(0.3)
 
         if verf == 0:
-            fontela = fonte.render('Tempo Esgotado!', 1, (0,0,0))
-            window.blit(fontela,(515,100))
-            pygame.display.update()  
+            timeOut = fonte.render('Tempo Esgotado!', 1, (0,0,0))
+            loopplvr = False
             if keyboard.is_pressed('Enter') == True:
                 loopplvr = False
-
-        else:
-            loopplvr = False
+    
+    window.blit(fontela,(posx,posy))
+    window.blit(timeOut,(515,100))
+    pygame.draw.rect(window, (255,0,0), rect)
+    loopplvr = False
 
 
     for event in pygame.event.get():
