@@ -9,14 +9,19 @@ def randomize():
     qstn = str(line)
     return qstn
 
+def renderL1(cont, posy = 50): 
+    global fontela 
+    fontela = fonte.render(linha1, 1, (0,0,0))
+    window.blit(fontela,(50,posy))
+
+
 loop = True
 corw = True
 cont = randomize()
 loopplvr = True
 verf = 0
 running = True
-
-
+posy = 50
 
 pygame.init()
 pygame.font.init()
@@ -35,28 +40,28 @@ fonte = pygame.font.SysFont('Daydream', 32)
 while running:
     window.fill(collor)
     while loopplvr: 
-        palavra = ''
-        posx = 50
-        posy = 50
-        posXrect = 50
-        posYrect = 50
-        rect = pygame.Rect(posXrect,posYrect,20,20)
+        linha1 = ''
+        linha2 = ''
+        cont = 0
 
         for letra in pergunta:
-            
-            fontela = fonte.render(palavra, 1, (0,0,0))
-            window.blit(fontela,(posx,posy))
-            
-
             if keyboard.is_pressed('Space') == True:
                 verf = 1
                 loopplvr = False         
                 break
                 
             else:
-                print(palavra)
-                palavra += letra
-                rect.x += 12
+                cont += 1
+                renderL1(cont, posy)
+                linha1 += letra
+                if cont%32 == 0:
+                    linha1 = ''
+                    linha1 += letra
+                    posy += 50
+                elif cont > 32:
+                    renderL1(cont, posy)
+                else: 
+                    pass
             pygame.display.update()    
             time.sleep(0.3)
 
@@ -65,10 +70,7 @@ while running:
             loopplvr = False
             if keyboard.is_pressed('Enter') == True:
                 loopplvr = False
-    
-    window.blit(fontela,(posx,posy))
-    window.blit(timeOut,(515,100))
-    pygame.draw.rect(window, (255,0,0), rect)
+
     loopplvr = False
 
 
