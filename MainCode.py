@@ -44,3 +44,4 @@ while loop:
 
     print(f'A resposta é: {resposta.value}')
     loop = False
+'''
