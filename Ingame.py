@@ -26,10 +26,10 @@ def gametela():
     planilha = openpyxl.load_workbook('perguntas/planilha.xlsx')
     sheet = planilha.active  
 
-    window = pygame.display.set_mode((1200,900))
+    window = pygame.display.set_mode((1280,720))
     color =  (255,255,255) 
     pygame.display.set_caption('JaguarIQ')
-    pygame.surface.Surface((1200,900))
+    pygame.surface.Surface((1280,720))
     fonte = pygame.font.SysFont('Daydream', 32)
 
     while ingame:
