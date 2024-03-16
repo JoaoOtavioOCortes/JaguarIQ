@@ -1,6 +1,7 @@
 import pygame
 
 class Button():
+    #Cria o botão com suas caracteristicas
     def __init__(self, x, y, image, scale):
         width = image.get_width()
         height = image.get_height()
@@ -9,12 +10,13 @@ class Button():
         self.rect.topleft = (x,y)
         self.clicked = False
 
+    #Desenha o botão na tela e o torna clicavel
     def draw(self, x):
         action = False
-        #get mouse position
+        #pega a posição do mouse
         mousepos = pygame.mouse.get_pos()
 
-        #check mouseover and clicked conditions
+        #checa a posição e o clique do mouse
         if self.rect.collidepoint(mousepos):
             if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
                 self.clicked = True
@@ -23,7 +25,7 @@ class Button():
         if pygame.mouse.get_pressed()[0] == 0:
             self.clicked = False
 
-        #draw button on the screen
+        #Desenha o botão na tela
         x.blit(self.image,(self.rect.x, self.rect.y))
     
         return action

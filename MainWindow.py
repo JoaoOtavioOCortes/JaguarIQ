@@ -10,7 +10,7 @@ pygame.init()
 running = True
 menu = True
 
-#Create display window
+#Criação da tela
 res = (1280,720)
 window = pygame.display.set_mode(res)
 color =  (255,255,255) 
@@ -18,12 +18,12 @@ pygame.display.set_caption('JaguarIQ')
 pygame.surface.Surface(res)
 fonte = pygame.font.SysFont('Daydream', 32)
 
-#load button images
+#Carregamento da imagem do botão
 start_img = pygame.image.load('images/buttons/Start.png').convert_alpha()
 quit_img = pygame.image.load('images/buttons/Quit.png').convert_alpha()
 options_img = pygame.image.load('images/buttons/Options.png').convert_alpha()
 
-#create button instances
+#Instanciando o botão
 start_button = Buttons.Button(515, 350, start_img, 0.8)
 quit_button = Buttons.Button(515, 600, quit_img, 0.8)
 options_button = Buttons.Button(515, 475, options_img, 0.8)
