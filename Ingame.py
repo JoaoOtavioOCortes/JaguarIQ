@@ -45,6 +45,8 @@ def gametela():
             linha1 = ''
             linha2 = ''
             cont = 0
+            timer = 5
+
 
             #inicia o jogo
             if keyboard.is_pressed('Enter') == True:
@@ -65,15 +67,29 @@ def gametela():
                             renderL1(cont, posy)
                         else: 
                             pass
+                    
                     pygame.display.update()    
                     time.sleep(0.1)
+                
                 wait = True
                 while wait:
-                    fontela = fonte.render('tempo esgotado!', 1, (0,0,0))
-                    resp = fonte.render(f'Resposta: {resposta}', 1, (255,0,0))
-                    window.blit(resp,(275,600))
-                    window.blit(fontela,(350,725))   
-                    pygame.display.update()
+                    for x in range(timer, -1, -1):
+                        timertxt = f'timer: {timer}'
+                        rendertimer = fonte.render(timertxt, False, (0,0,0))
+                        window.blit(rendertimer,(800,50))
+                        
+                        if x <= 0:
+                            fontela = fonte.render('tempo esgotado!', 1, (255,0,0))
+                            resp = fonte.render(f'Resposta: {resposta}', 1, (255,0,0))
+                            window.blit(resp,(275,600))
+                            window.blit(fontela,(275,500))   
+
+                        pygame.display.update()
+                        time.sleep(1)
+                        rendertimer = fonte.render(timertxt, False, (255,255,255))
+                        window.blit(rendertimer,(800,50))
+                        timer -= 1
+
                     if keyboard.is_pressed('Esc'):
                         wait = False
                     elif keyboard.is_pressed('Enter'):
@@ -87,5 +103,4 @@ def gametela():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 ingame = False
-
         pygame.display.update()

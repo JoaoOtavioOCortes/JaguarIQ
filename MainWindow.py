@@ -35,7 +35,8 @@ while running:
     window.fill(color)
     if menu: 
         if start_button.draw(window):
-            gametela()  
+            gametela()
+            running = False  
         if options_button.draw(window):
             res = optionstela()
         if quit_button.draw(window):
