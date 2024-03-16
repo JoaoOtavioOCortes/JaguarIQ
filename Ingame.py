@@ -4,28 +4,33 @@ import time
 import keyboard  
 import pygame
 
+#seleciona uma pergunta aleatória
 def randomize():
     line = random.randint(1,260)
     qstn = str(line)
     return qstn
 
+#renderiza a pergunta
 def renderL1(cont, posy = 50): 
     global fontela 
     fontela = fonte.render(linha1, 1, (0,0,0))
     window.blit(fontela,(50,posy))
 
+#funcionamento do jogo
 def gametela():
+    #variaveis globais
     global window, fonte, linha1
     loopplvr = True
-    verf = 0
     ingame = True
 
     pygame.init()
     pygame.font.init()
 
+    #carregando planilha de perguntas
     planilha = openpyxl.load_workbook('perguntas/planilha.xlsx')
     sheet = planilha.active  
 
+    #abrindo tela do jogo
     window = pygame.display.set_mode((1280,720))
     color =  (255,255,255) 
     pygame.display.set_caption('JaguarIQ')
@@ -54,7 +59,7 @@ def gametela():
                     if keyboard.is_pressed('Space') == True:
                         loopplbr = False
                         break         
-                        
+                    #printando a pergunta   
                     else:
                         cont += 1
                         renderL1(cont, posy)
@@ -72,12 +77,14 @@ def gametela():
                     time.sleep(0.1)
                 
                 wait = True
+                #Funcionamento do timer
                 while wait:
                     for x in range(timer, -1, -1):
                         timertxt = f'timer: {timer}'
                         rendertimer = fonte.render(timertxt, False, (0,0,0))
                         window.blit(rendertimer,(800,50))
                         
+                        #timer esgotado
                         if x <= 0:
                             fontela = fonte.render('tempo esgotado!', 1, (255,0,0))
                             resp = fonte.render(f'Resposta: {resposta}', 1, (255,0,0))
