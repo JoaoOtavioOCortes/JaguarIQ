@@ -3,6 +3,10 @@ import random
 import time
 import keyboard  
 import pygame
+import Buttons
+import sys
+
+window = pygame.display.set_mode((1280,720))
 
 #seleciona uma pergunta aleatória
 def randomize():
@@ -11,19 +15,25 @@ def randomize():
     return qstn
 
 #renderiza a pergunta
+
+def run(screen = None):
+    if not screen:
+        pygame.init()
+        screen = pygame.display.set_mode((1280, 720))
+    mainloop(screen)
+
 def renderL1(cont, posy = 50): 
-    global fontela 
+    global fontela, window 
     fontela = fonte.render(linha1, 1, (0,0,0))
     window.blit(fontela,(50,posy))
 
 #funcionamento do jogo
-def gametela():
+def mainloop(window):
     #variaveis globais
-    global window, fonte, linha1
+    global fonte, linha1
     loopplvr = True
     ingame = True
 
-    pygame.init()
     pygame.font.init()
 
     #carregando planilha de perguntas
@@ -31,33 +41,34 @@ def gametela():
     sheet = planilha.active  
 
     #abrindo tela do jogo
-    window = pygame.display.set_mode((1280,720))
     color =  (255,255,255) 
     pygame.display.set_caption('JaguarIQ')
     pygame.surface.Surface((1280,720))
     fonte = pygame.font.SysFont('Daydream', 32)
 
+    back_img = pygame.image.load('images/buttons/back.png').convert_alpha()
+    back_button = Buttons.Button(5,8, back_img,0.5)
+    posy = 50
+    geraplvr = randomize()
+    pergunta = sheet['A'+geraplvr].value
+    resposta = sheet['B'+geraplvr].value 
+    window.fill(color)
+    linha1 = ''
+    linha2 = ''
+    cont = 0
+    timer = 5
+
     while ingame:
         window.fill(color)
-
-        while loopplvr:
-            posy = 50
-            geraplvr = randomize()
-            pergunta = sheet['A'+geraplvr].value
-            resposta = sheet['B'+geraplvr].value 
-            window.fill(color)
-            pygame.display.update() 
-            linha1 = ''
-            linha2 = ''
-            cont = 0
-            timer = 5
-
-
+        
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                ingame = False
+                sys.exit()
             #inicia o jogo
             if keyboard.is_pressed('Enter') == True:
                 for letra in pergunta:
                     if keyboard.is_pressed('Space') == True:
-                        loopplbr = False
                         break         
                     #printando a pergunta   
                     else:
@@ -71,8 +82,7 @@ def gametela():
                         elif cont > 38:
                             renderL1(cont, posy)
                         else: 
-                            pass
-                    
+                            pass             
                     pygame.display.update()    
                     time.sleep(0.1)
                 
@@ -106,8 +116,17 @@ def gametela():
 
             else:
                 pass
+            
+            if back_button.draw(window):
+                return
+                    
+            mousepos = pygame.mouse.get_pos()
+            print(mousepos)
+            pygame.display.update()    
+            time.sleep(0.1)
 
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                ingame = False
-        pygame.display.update()
+
+    pygame.quit()
+
+if __name__ == '__main__':
+    run()
